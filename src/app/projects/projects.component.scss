@@ -1,0 +1,116 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.root {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+
+  //@media screen and (max-width: 60rem) {
+  //  flex-direction: column;
+  //}
+
+  aside {
+    overflow-y: auto;
+  }
+
+  aside, section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    b {
+      display: block;
+      margin-bottom: 2rem;
+      font-size: 20px;
+    }
+
+    input {
+      margin-top: .5rem;
+    }
+  }
+
+  aside:first-of-type {
+    width: 16rem;
+
+    @media screen and (max-width: 60rem) {
+      width: 14rem;
+    }
+  }
+
+  section {
+    width: 0;
+    flex-grow: 1;
+  }
+
+  aside:last-of-type {
+    width: 16rem;
+
+    @media screen and (max-width: 60rem) {
+      width: 14rem;
+    }
+  }
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex: 1;
+  height: 0;
+}
+
+.projects-header {
+  margin-top: 1rem;
+
+  & > div {
+    font-weight: bold;
+  }
+}
+
+.projects-footer {
+  padding: 1rem 1rem 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.projects-row {
+  cursor: pointer;
+  border-radius: 4rem;
+
+  &:hover {
+    background-color: rgb(0 0 0 / 5%);
+  }
+
+  transition: background-color 200ms ease-in-out;
+
+  &.selected {
+    background-color: rgb(0 0 0 / 5%);
+  }
+}
+
+.projects-row, .projects-header {
+  display: flex;
+
+  & > div {
+    width: 0;
+    flex: 1;
+    padding: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.comments-header {
+  margin-top: 4.75rem;
+  font-weight: bold;
+}
+
+.comment {
+  padding: 1rem;
+  border: 1px solid lightgray;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}

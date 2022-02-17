@@ -1,0 +1,54 @@
+html, body {
+  display: flex;
+  margin: 0;
+
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+input:not([type]), input[type="text"], textarea {
+  border-radius: 1rem;
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: .5rem 1rem;
+  border: 1px solid lightgray;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea {
+  padding: 1rem;
+}
+
+.right {
+  text-align: right;
+}
+
+a {
+  color: indianred;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.btn {
+    font-weight: bold;
+    display: inline-block;
+    padding: .5rem 1rem;
+  }
+}
+
+.balloon {
+  flex-grow: 1;
+}
+
+.empty {
+  color: gray;
+}

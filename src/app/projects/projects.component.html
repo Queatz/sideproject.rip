@@ -1,0 +1,56 @@
+<div class="root">
+  <aside>
+    <b>Side Projects</b>
+    <div>Add your side project</div>
+    <br />
+    <input [(ngModel)]="newProject.name" placeholder="Project name" />
+    <input [(ngModel)]="newProject.link" placeholder="Link" />
+    <input [(ngModel)]="newProject.purpose" placeholder="Purpose" />
+    <div class="right">
+      <a class="btn" (click)="submitProject()">Submit now</a>
+    </div>
+    <div class="balloon"></div>
+    <div>
+      <small>
+        This website is Open Source.  Fork or modify it on <a href="#">GitHub</a>.
+      </small>
+    </div>
+  </aside>
+  <section>
+    <input [(ngModel)]="searchText" placeholder="🔍 Search" />
+    <div class="projects-header">
+      <div>Project</div>
+      <div>Link</div>
+      <div>Purpose</div>
+      <div>Added</div>
+    </div>
+    <div class="projects-container">
+      <div class="projects-row"
+           [ngClass]="{ 'selected': selectedProject === project }"
+           (click)="selectProject(project)"
+           *ngFor="let project of projects">
+        <div [title]="project.name">{{ project.name }}</div>
+        <div [title]="project.link">
+          <a target="_blank" [href]="project.link">{{ project.link }}</a>
+        </div>
+        <div [title]="project.purpose">{{ project.purpose }}</div>
+        <div [title]="project.created | date">{{ project.created | date }}</div>
+      </div>
+    </div>
+    <div class="projects-footer">
+      {{ page.start }} - {{ page.end }} of {{ page.total }} total
+      <a class="btn" (click)="prevPage()">Prev</a>
+      <a class="btn" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+  <aside *ngIf="selectedProject">
+    <div class="comments-header">Comments</div>
+    <textarea [(ngModel)]="newComment" placeholder="Write a comment"></textarea>
+    <div class="right">
+      <a class="btn" (click)="addComment()">Add comment</a>
+    </div>
+    <div class="comment" *ngFor="let comment of comments">
+      Cool
+    </div>
+  </aside>
+</div>
