@@ -17,11 +17,11 @@
     </div>
   </aside>
   <section>
-    <input [(ngModel)]="searchText" placeholder="🔍 Search" />
+    <input [(ngModel)]="searchText" (ngModelChange)="reload()" placeholder="🔍 Search" />
     <div class="projects-header">
       <div>Project</div>
-      <div>Link</div>
       <div>Purpose</div>
+      <div>Link</div>
       <div>Added</div>
     </div>
     <div class="projects-container">
@@ -30,17 +30,15 @@
            (click)="selectProject(project)"
            *ngFor="let project of projects">
         <div [title]="project.name">{{ project.name }}</div>
-        <div [title]="project.link">
-          <a target="_blank" [href]="project.link">{{ project.link }}</a>
-        </div>
         <div [title]="project.purpose">{{ project.purpose }}</div>
-        <div [title]="project.created | date">{{ project.created | date }}</div>
+        <div class="one-line" [title]="project.link"><a target="_blank" [href]="project.link">{{ project.link }}</a></div>
+        <div class="one-line" [title]="project.created | date">{{ project.created | date }}</div>
       </div>
     </div>
     <div class="projects-footer">
+      <a class="btn" (click)="prevPage()" *ngIf="currentOffset > 0">Prev</a>
       {{ page.start }} - {{ page.end }} of {{ page.total }} total
-      <a class="btn" (click)="prevPage()">Prev</a>
-      <a class="btn" (click)="nextPage()">Next</a>
+      <a class="btn" (click)="nextPage()" *ngIf="projects.length === 10">Next</a>
     </div>
   </section>
   <aside *ngIf="selectedProject">
@@ -50,7 +48,7 @@
       <a class="btn" (click)="addComment()">Add comment</a>
     </div>
     <div class="comment" *ngFor="let comment of comments">
-      Cool
+      {{ comment.text }}
     </div>
   </aside>
 </div>

@@ -44,7 +44,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: result => {
         this.page.start = result.offset + 1
-        this.page.end = result.offset + 1 + result.data.length
+        this.page.end = result.offset + (result.data.length || 1)
         this.page.total = result.total
         this.projects = result.data
       },
@@ -59,6 +59,15 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   submitProject() {
+    this.newProject.name = this.newProject.name.trim()
+    this.newProject.link = this.newProject.link.trim()
+    this.newProject.purpose = this.newProject.purpose.trim()
+
+    if (!this.newProject.name || !this.newProject.link || !this.newProject.purpose) {
+      alert('Missing fields')
+      return
+    }
+
     this.api.createProject(this.newProject).pipe(
       takeUntil(this.destroyed)
     ).subscribe({
@@ -78,13 +87,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   prevPage() {
-    this.currentOffset += 10
+    this.currentOffset -= 10
+
+    if (this.currentOffset < 0) {
+      this.currentOffset = 0
+    }
 
     this.changes.next(null)
   }
 
   nextPage() {
-    this.currentOffset -= 10
+    this.currentOffset += 10
 
     this.changes.next(null)
   }
@@ -95,10 +108,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     }
 
     if (!this.newComment.trim()) {
+      alert('Missing text')
       return
     }
 
-    this.api.createComment(this.selectedProject.id, { text: this.newComment }).pipe(
+    this.api.createComment(this.selectedProject.id, { text: this.newComment.trim() }).pipe(
       takeUntil(this.destroyed)
     ).subscribe({
       next: () => {
@@ -139,5 +153,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       },
       error: err => alert(err.statusText)
     })
+  }
+
+  reload() {
+    this.changes.next(null)
   }
 }

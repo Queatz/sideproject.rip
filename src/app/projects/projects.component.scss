@@ -77,7 +77,7 @@
 
 .projects-row {
   cursor: pointer;
-  border-radius: 4rem;
+  border-radius: 1rem;
 
   &:hover {
     background-color: rgb(0 0 0 / 5%);
@@ -98,8 +98,11 @@
     flex: 1;
     padding: 1rem;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+
+    &.one-line {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 }
 
